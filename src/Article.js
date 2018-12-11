@@ -1,17 +1,36 @@
 import React, {Component} from 'react'
 
 export default class Article extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isOpen: false
+    }
+  }
   render(){
     const {article} = this.props
+    const isOpen = this.state.isOpen
     return (
       <div>
         <h3>{article.title}</h3>
-        <button>Open</button>
-        <section>{article.text}</section>
-        <br/>
-        <sup>{article.date}</sup>
+        <button onClick = {this.toggleOpen}>
+        {isOpen ? 'Close' : 'Open'}
+        </button>
+        {this.showUp()}
       </div>
     )
+  }
+  toggleOpen = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+  showUp(){
+    const {article} = this.props
+    if (!this.state.isOpen) return null
+    return <div><section>{article.text}</section>
+    <br/>
+    <sup>{article.date}</sup></div>
   }
 }
 
