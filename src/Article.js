@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Comment from './CommentList.js'
 
 export default class Article extends Component {
   constructor(props){
@@ -30,6 +31,7 @@ export default class Article extends Component {
     if (!this.state.isOpen) return null
     return <div><section>{article.text}</section>
     <br/>
+    <Comment comments = {article.comments}/>
     <sup>{article.date}</sup></div>
   }
 }
