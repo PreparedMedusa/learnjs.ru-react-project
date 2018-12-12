@@ -1,49 +1,37 @@
-import React, {Component} from 'react'
-import Comment from './CommentList.js'
+import React, { Component } from "react";
+import CommentList from "./CommentList.js";
 
 export default class Article extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       isOpen: false
-    }
+    };
   }
-  render(){
-    const {article} = this.props
-    const isOpen = this.state.isOpen
+  render() {
+    const { article } = this.props;
+    const isOpen = this.state.isOpen;
     return (
       <div>
         <h3>{article.title}</h3>
-        <button onClick = {this.toggleOpen}>
-        {isOpen ? 'Close' : 'Open'}
-        </button>
+        <button onClick={this.toggleOpen}>{isOpen ? "Close" : "Open"}</button>
         {this.showUp()}
       </div>
-    )
+    );
   }
   toggleOpen = () => {
     this.setState({
       isOpen: !this.state.isOpen
-    })
-  }
-  showUp(){
-    const {article} = this.props
-    if (!this.state.isOpen) return null
-    return <div><section>{article.text}</section>
-    <br/>
-    <Comment comments = {article.comments}/>
-    <sup>{article.date}</sup></div>
+    });
+  };
+  showUp() {
+    const { article } = this.props;
+    if (!this.state.isOpen) return null;
+    return (
+      <section>
+        {article.text}
+        <CommentList comments={article.comments} />
+      </section>
+    );
   }
 }
-
-// export default function Article(props) {
-//   const {article} = props
-//   return (
-//     <div>
-//       <h3>{article.title}</h3>
-//       <section>{article.text}</section>
-//       <br/>
-//       <sup>{article.date}</sup>
-//     </div>
-//   )
-// }
