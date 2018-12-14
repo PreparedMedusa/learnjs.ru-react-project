@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import CommentList from "./CommentList.js";
+import toggleOpen from "../decorators/toggleOpen.js";
 
-export default class Article extends Component {
+class Article extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,3 +36,5 @@ export default class Article extends Component {
     );
   }
 }
+
+export default toggleOpen(Article);
