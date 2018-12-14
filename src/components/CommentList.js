@@ -7,27 +7,24 @@ export default class CommentList extends Component {
   };
   render() {
     const { comments } = this.props;
-    const isOpen = this.state.isOpen;
     if (!comments || !comments.length) return null;
-    const comment = comments.map(comment => (
-      <li key={comment.id}>
-        <Comment comment={comment} />
-      </li>
-    ));
     return (
       <div>
         <button onClick={this.toggleOpen}>
-          {isOpen ? "Hide comments" : "Show comments"}
+          {this.state.isOpen ? "Hide comments" : "Show comments ("+comments.length+")"}
         </button>
-        <ul>{this.showUp(comment)}</ul>
+        <ul>
+          {this.showUp()}
+        </ul>
       </div>
     );
   }
   toggleOpen = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
-  showUp(comment) {
+  showUp() {
     if (!this.state.isOpen) return null;
-    return comment;
+    const { comments } = this.props;
+    return comments.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)
   }
 }
